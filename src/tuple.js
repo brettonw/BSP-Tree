@@ -1,23 +1,27 @@
-var tuple = function () {
+var MakeTuple = function (d) {
     var tuple = Object.create(null);
 
     tuple.validate = function (left) {
-        return left instanceof Array;
+        return (left instanceof Array) && (left.lengh == d);
     }
 
     tuple.copy = function (left) {
         return left.slice();
     }
 
+    tuple.extend = function (left, newSize, fill) {
+
+    }
+
     tuple.areEqual = function (left, right) {
-        for (var i = 0, count = left.length; i < count; ++i) {
+        for (var i = 0; i < d; ++i) {
             if (left[i] != right[i]) return false;
         }
         return true;
     }
 
     tuple.areNotEqual = function (left, right) {
-        for (var i = 0, count = left.length; i < count; ++i) {
+        for (var i = 0; i < d; ++i) {
             if (left[i] != right[i]) return true;
         }
         return false;
@@ -25,7 +29,7 @@ var tuple = function () {
 
     tuple.add = function (left, right) {
         var result = [];
-        for (var i = 0, count = left.length; i < count; ++i) {
+        for (var i = 0; i < d; ++i) {
             result.push (left[i] + right[i]);
         }
         return result;
@@ -33,7 +37,7 @@ var tuple = function () {
 
     tuple.subtract = function (left, right) {
         var result = [];
-        for (var i = 0, count = left.length; i < count; ++i) {
+        for (var i = 0; i < d; ++i) {
             result.push(left[i] - right[i]);
         }
         return result;
@@ -46,17 +50,17 @@ var tuple = function () {
 
         var result = [];
         if (isNumber(right) && this.validate(left)) {
-            for (var i = 0, count = left.length; i < count; ++i) {
+            for (var i = 0; i < d; ++i) {
                 result.push(left[i] * right);
             }
         }
 
         if (isNumber(left) && this.validate(right)) {
-            for (var i = 0, count = left.length; i < count; ++i) {
+            for (var i = 0; i < d; ++i) {
                 result.push(left * right[i]);
             }
         }
-        
+
         // XXX want to halt execution here
         debugger;
         return result;
@@ -64,7 +68,7 @@ var tuple = function () {
 
     tuple.dot = function (left, right) {
         var result = left[0] * right[0];
-        for (var i = 1, count = left.length; i < count; ++i) {
+        for (var i = 0; i < d; ++i) {
             result += (left[i] * right[i]);
         }
         return result;
@@ -80,4 +84,4 @@ var tuple = function () {
     }
 
     return tuple;
-}();
+};
