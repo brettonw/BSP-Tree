@@ -20,6 +20,25 @@ function makeSvg () {
 
 function main () {
     var display = makeSvg ();
-    document.getElementById ("display").innerHTML = display;
+    document.getElementById("display").innerHTML = display;
+
+    test();
 }
 
+function test() {
+    var htuple3 = registry.fetch("HTuple3");
+    var hyperplane3 = registry.fetch("Hyperplane3");
+
+    var points = [
+        htuple3.point([0, 0, 0]),
+        htuple3.point([0, 1, 0]),
+        htuple3.point([1, 0, 0])
+    ];
+
+    htuple3.print(points[0]);
+    htuple3.print(points[1]);
+    htuple3.print(points[2]);
+
+    var plane = hyperplane3.fromPoints(points[0], points[1], points[2]);
+    hyperplane3.print(plane);
+}

@@ -3,7 +3,7 @@ var makeTuple = function (d) {
         var tuple = Object.create(null);
 
         tuple.validate = function (left) {
-            return (left instanceof Array) && (left.lengh == d);
+            return (left instanceof Array) && (left.length == d);
         }
 
         tuple.copy = function (left) {
@@ -33,17 +33,17 @@ var makeTuple = function (d) {
         }
 
         tuple.add = function (left, right) {
-            var result = [];
+            var result = new Array(d);
             for (var i = 0; i < d; ++i) {
-                result.push (left[i] + right[i]);
+                result[i] = left[i] + right[i];
             }
             return result;
         }
 
         tuple.subtract = function (left, right) {
-            var result = [];
+            var result = new Array(d);
             for (var i = 0; i < d; ++i) {
-                result.push(left[i] - right[i]);
+                result[i] = left[i] - right[i];
             }
             return result;
         }
@@ -53,21 +53,20 @@ var makeTuple = function (d) {
                 return !isNaN(parseFloat(n)) && isFinite(n);
             }
 
-            var result = [];
+            var result = new Array(d);
             if (isNumber(right) && this.validate(left)) {
                 for (var i = 0; i < d; ++i) {
-                    result.push(left[i] * right);
+                    result[i] = left[i] * right;
                 }
-            }
-
-            if (isNumber(left) && this.validate(right)) {
+            } else if (isNumber(left) && this.validate(right)) {
                 for (var i = 0; i < d; ++i) {
-                    result.push(left * right[i]);
+                    result[i] = left * right[i];
                 }
-            }
+            } else {
 
-            // XXX want to halt execution here
-            debugger;
+                // XXX want to halt execution here
+                debugger;
+            }
             return result;
         }
 
@@ -86,6 +85,15 @@ var makeTuple = function (d) {
         tuple.normalize = function (left) {
             var length = this.length(left);
             return this.scale(left, 1.0 / length);
+        }
+
+        tuple.print = function (left) {
+            var output = "(" + left[0];
+            for (var i = 1; i < d; ++i) {
+                output += ", " + left[i];
+            }
+            output += ")";
+            console.log(output);
         }
 
         return tuple;

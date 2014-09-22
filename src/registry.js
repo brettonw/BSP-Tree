@@ -13,4 +13,6 @@ var registry = function () {
     registry.fetch = function (name) {
         return this.contents[name];
     }
+
+    return registry;
 }();

@@ -4,7 +4,7 @@ var makeHyperplane = function (d) {
         var hyperplane = Object.create(htuple);
 
         hyperplane.fromNormalAndPoint = function (normal, point) {
-            htuple.htuple (normal, -htuple.dot(normal, point));
+            return htuple.htuple (normal, -htuple.dot(normal, point));
         }
 
         hyperplane.fromPoints = function (a, b, c) {
@@ -17,3 +17,7 @@ var makeHyperplane = function (d) {
         return hyperplane;
     });
 };
+
+makeHyperplane(1);
+makeHyperplane(2);
+makeHyperplane(3);
