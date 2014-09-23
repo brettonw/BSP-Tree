@@ -8,6 +8,5 @@ var HTuple3d = function () {
             0
         ];
     }
-
     return tuple;
 }();

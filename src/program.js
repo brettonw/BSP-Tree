@@ -26,19 +26,19 @@ function main () {
 }
 
 function test() {
-    var htuple3 = registry.fetch("HTuple3");
-    var hyperplane3 = registry.fetch("Hyperplane3");
+    var htuple3 = registry.fetch("HTuple-3");
+    var hyperplane3 = registry.fetch("Hyperplane-3");
 
     var points = [
-        htuple3.point([0, 0, 0]),
-        htuple3.point([0, 1, 0]),
-        htuple3.point([1, 0, 0])
+        NEW("HTuple-3").point([0, 0, 1]),
+        NEW("HTuple-3").point([1, 0, 0]),
+        NEW("HTuple-3").point([0, 1, 0])
     ];
 
-    htuple3.print(points[0]);
-    htuple3.print(points[1]);
-    htuple3.print(points[2]);
+    points[0].print("0");
+    points[1].print("1");
+    points[2].print("2");
 
     var plane = hyperplane3.fromPoints(points[0], points[1], points[2]);
-    hyperplane3.print(plane);
+    hyperplane3.print("plane", plane);
 }

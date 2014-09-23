@@ -1,96 +1,114 @@
 var makeTuple = function (d) {
-    return registry.get ("Tuple" + d, function () {
+    DEF ("Tuple-" + d, function () {
         var tuple = Object.create(null);
 
-        tuple.validate = function (left) {
-            return (left instanceof Array) && (left.length == d);
-        }
-
-        tuple.copy = function (left) {
-            var result = new Array(d);
+        tuple.zero = function () {
+            var value = new Array(d);
             for (var i = 0; i < d; ++i) {
-                result[i] = left[i];
+                value[i] = 0;
             }
-            return result;
+            this.value = value;
+            return this;
         }
 
-        tuple.extend = function (left, newSize, fill) {
-
-        }
-
-        tuple.areEqual = function (left, right) {
+        tuple.init = function (source) {
+            var value = new Array(d);
             for (var i = 0; i < d; ++i) {
-                if (left[i] != right[i]) return false;
+                value[i] = source[i];
+            }
+            this.value = value;
+            return this;
+        }
+
+        tuple.initFromTuple = function (tuple) {
+            return this.init(tuple.value);
+        }
+
+        tuple.isEqualTo = function (right) {
+            for (var i = 0; i < d; ++i) {
+                if (this.value[i] != right.value[i]) return false;
             }
             return true;
         }
 
-        tuple.areNotEqual = function (left, right) {
+        tuple.isNotEqualTo = function (right) {
             for (var i = 0; i < d; ++i) {
-                if (left[i] != right[i]) return true;
+                if (this.value[i] != right.value[i]) return true;
             }
             return false;
         }
 
-        tuple.add = function (left, right) {
-            var result = new Array(d);
+        tuple.add = function (right) {
+            var result = Object.create(this.prototype);
+            var value = new Array(d);
             for (var i = 0; i < d; ++i) {
-                result[i] = left[i] + right[i];
+                value[i] = this.value[i] + right.value[i];
             }
+            result.value = value;
             return result;
         }
 
-        tuple.subtract = function (left, right) {
-            var result = new Array(d);
+        tuple.subtract = function (right) {
+            var result = Object.create(this.prototype);
+            var value = new Array(d);
             for (var i = 0; i < d; ++i) {
-                result[i] = left[i] - right[i];
+                value[i] = this.value[i] - right.value[i];
             }
+            result.value = value;
             return result;
         }
 
-        tuple.scale = function (left, right) {
-            function isNumber(n) {
-                return !isNaN(parseFloat(n)) && isFinite(n);
-            }
-
-            var result = new Array(d);
-            if (isNumber(right) && this.validate(left)) {
-                for (var i = 0; i < d; ++i) {
-                    result[i] = left[i] * right;
-                }
-            } else if (isNumber(left) && this.validate(right)) {
-                for (var i = 0; i < d; ++i) {
-                    result[i] = left * right[i];
-                }
-            } else {
-
-                // XXX want to halt execution here
-                debugger;
-            }
-            return result;
-        }
-
-        tuple.dot = function (left, right) {
-            var result = left[0] * right[0];
+        tuple.scale = function (right) {
+            var result = Object.create(this.prototype);
+            var value = new Array(d);
             for (var i = 0; i < d; ++i) {
-                result += (left[i] * right[i]);
+                value[i] = this.value[i] * right;
             }
+            result.value = value;
             return result;
         }
 
-        tuple.length = function (left) {
-            return Math.sqrt (this.dot (left, left));
-        }
-
-        tuple.normalize = function (left) {
-            var length = this.length(left);
-            return this.scale(left, 1.0 / length);
-        }
-
-        tuple.print = function (left) {
-            var output = "(" + left[0];
+        tuple.dot = function (right) {
+            var result = this.value[0] * right.value[0];
             for (var i = 1; i < d; ++i) {
-                output += ", " + left[i];
+                result += (this.value[i] * right.value[i]);
+            }
+            return result;
+        }
+
+        tuple.length = function () {
+            return Math.sqrt (this.dot (this));
+        }
+
+        tuple.normalize = function () {
+            var length = this.length();
+            return this.scale(1.0 / length);
+        }
+
+        tuple.minor = function () {
+            var result = 0;
+            for (var i = 1; i < d; ++i) {
+                if (Math.abs(this.value[i]) < Math.abs(this.value[result])) {
+                    result = i;
+                }
+            }
+            return result;
+        }
+
+        tuple.major = function () {
+            var result = 0;
+            for (var i = 1; i < d; ++i) {
+                if (Math.abs(this.value[i]) > Math.abs(this.value[result])) {
+                    result = i;
+                }
+            }
+            return result;
+        }
+
+        tuple.print = function (name) {
+            var output = name + " (" + this.value[0].toPrecision(4);
+            for (var i = 1; i < d; ++i) {
+                output += ", " + this.value[i].toPrecision(4);
             }
             output += ")";
             console.log(output);
