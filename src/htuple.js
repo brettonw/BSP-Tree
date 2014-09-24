@@ -37,16 +37,17 @@ makeHTuple(2);
     return tuple;
 }();
 
-
 makeHTuple(3);
 αω.HTuple3 = function () {
     var tuple = registry.fetch("HTuple-3");
     tuple.cross = function (right) {
-        return this.vector ([
+        var value = [
             (this.value[1] * right.value[2]) - (this.value[2] * right.value[1]),
             (this.value[2] * right.value[0]) - (this.value[0] * right.value[2]),
-            (this.value[0] * right.value[1]) - (this.value[1] * right.value[0])
-        ]);
+            (this.value[0] * right.value[1]) - (this.value[1] * right.value[0]),
+            0
+        ];
+        return Object.create(Object.getPrototypeOf(this)).use (value);
     }
     return tuple;
 }();

@@ -11,6 +11,11 @@ var makeTuple = function (d) {
             return this;
         }
 
+        tuple.use = function (source) {
+            this.value = source;
+            return this;
+        }
+
         tuple.init = function (source) {
             var value = new Array(d);
             for (var i = 0; i < d; ++i) {
@@ -39,33 +44,27 @@ var makeTuple = function (d) {
         }
 
         tuple.add = function (right) {
-            var result = Object.create(this.prototype);
             var value = new Array(d);
             for (var i = 0; i < d; ++i) {
                 value[i] = this.value[i] + right.value[i];
             }
-            result.value = value;
-            return result;
+            return Object.create(Object.getPrototypeOf(this)).use (value);
         }
 
         tuple.subtract = function (right) {
-            var result = Object.create(this.prototype);
             var value = new Array(d);
             for (var i = 0; i < d; ++i) {
                 value[i] = this.value[i] - right.value[i];
             }
-            result.value = value;
-            return result;
+            return Object.create(Object.getPrototypeOf(this)).use (value);
         }
 
         tuple.scale = function (right) {
-            var result = Object.create(this.prototype);
             var value = new Array(d);
             for (var i = 0; i < d; ++i) {
                 value[i] = this.value[i] * right;
             }
-            result.value = value;
-            return result;
+            return Object.create(Object.getPrototypeOf(this)).use (value);
         }
 
         tuple.dot = function (right) {
