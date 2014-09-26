@@ -11,10 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{DADA10F4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{556D49E7-B2BF-4CE1-828B-0BE4FD559A6B}"
 	ProjectSection(SolutionItems) = preProject
+		src\bedrock.js = src\bedrock.js
+		src\globals.js = src\globals.js
 		src\htuple.js = src\htuple.js
-		src\htuple2d.js = src\htuple2d.js
-		src\htuple3d.js = src\htuple3d.js
 		src\hyperplane.js = src\hyperplane.js
+		src\matrix.js = src\matrix.js
+		src\polygon.js = src\polygon.js
 		src\program.js = src\program.js
 		src\registry.js = src\registry.js
 		src\tuple.js = src\tuple.js

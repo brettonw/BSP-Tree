@@ -2,18 +2,17 @@ var makeTuple = function (d) {
     DEF ("Tuple-" + d, function () {
         var tuple = Object.create(null);
 
+        tuple.use = function (source) {
+            this.value = source;
+            return this;
+        }
+
         tuple.zero = function () {
             var value = new Array(d);
             for (var i = 0; i < d; ++i) {
                 value[i] = 0;
             }
-            this.value = value;
-            return this;
-        }
-
-        tuple.use = function (source) {
-            this.value = source;
-            return this;
+            return this.use(value);
         }
 
         tuple.init = function (source) {
@@ -21,8 +20,7 @@ var makeTuple = function (d) {
             for (var i = 0; i < d; ++i) {
                 value[i] = source[i];
             }
-            this.value = value;
-            return this;
+            return this.use (value);
         }
 
         tuple.initFromTuple = function (tuple) {
