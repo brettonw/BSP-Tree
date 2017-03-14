@@ -181,3 +181,10 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+# MacOS
+.DS_Store
+
+# intelliJ
+.idea
+*.iml
