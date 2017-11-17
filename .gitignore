@@ -188,3 +188,8 @@ FakesAssemblies/
 # intelliJ
 .idea
 *.iml
+
+# vs2017
+.vs
+Debug
+Release
