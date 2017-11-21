@@ -13,8 +13,8 @@
   <ItemGroup>
     <ClCompile Include="src\arcball.cpp" />
     <ClCompile Include="src\bound_3d.cpp" />
-    <ClCompile Include="src\bspnode_3d.cpp" />
-    <ClCompile Include="src\bsptree_3d.cpp" />
+    <ClCompile Include="src\bsp_tree_node_3d.cpp" />
+    <ClCompile Include="src\bsp_tree_3d.cpp" />
     <ClCompile Include="src\camera_3d.cpp" />
     <ClCompile Include="src\counted_object.cpp" />
     <ClCompile Include="src\cube.cpp" />
@@ -26,9 +26,7 @@
     <ClCompile Include="src\point_3d.cpp" />
     <ClCompile Include="src\polygon_3d.cpp" />
     <ClCompile Include="src\polygon_list_3d.cpp" />
-    <ClCompile Include="src\quaternion_3d.cpp" />
     <ClCompile Include="src\ray_3d.cpp" />
-    <ClCompile Include="src\split.cpp" />
     <ClCompile Include="src\transform_3d.cpp" />
     <ClCompile Include="src\tuple_2d.cpp" />
     <ClCompile Include="src\tuple_3d.cpp" />
@@ -39,8 +37,8 @@
   <ItemGroup>
     <ClInclude Include="src\arcball.h" />
     <ClInclude Include="src\bound_3d.h" />
-    <ClInclude Include="src\bspnode_3d.h" />
-    <ClInclude Include="src\bsptree_3d.h" />
+    <ClInclude Include="src\bsp_tree_node_3d.h" />
+    <ClInclude Include="src\bsp_tree_3d.h" />
     <ClInclude Include="src\camera_3d.h" />
     <ClInclude Include="src\coord.h" />
     <ClInclude Include="src\counted_object.h" />
@@ -54,9 +52,7 @@
     <ClInclude Include="src\polygon_list_3d.h" />
     <ClInclude Include="src\precompile.h" />
     <ClInclude Include="src\ptr_to.h" />
-    <ClInclude Include="src\quaternion_3d.h" />
     <ClInclude Include="src\ray_3d.h" />
-    <ClInclude Include="src\split.h" />
     <ClInclude Include="src\transform_3d.h" />
     <ClInclude Include="src\tuple_2d.h" />
     <ClInclude Include="src\tuple_3d.h" />

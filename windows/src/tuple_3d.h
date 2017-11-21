@@ -1,54 +1,36 @@
-//------------------------------------------------------------------------------
-//	File:					tuple_3d.h
-//	Date:					8/26/94
-//	Author:				Bretton Wade
-//
-//	Description:	this file contains the class definition for a tuple_3d
-//
-//------------------------------------------------------------------------------
+#ifndef     _COORD_
+#include    "coord.h"
+#endif  //  _COORD_
 
-#include "coord.h"
+#ifndef	    _TUPLE_3D_
+#define	    _TUPLE_3D_
 
-#ifndef	TUPLE
-#define	TUPLE
+class Tuple_3d {
+    private:
+    protected:
+    real	xyz[4];
+    public:
+    Tuple_3d (void) {}
+    Tuple_3d (const Tuple_3d& t);
+    Tuple_3d (real x, real y, real z, real w);
+    void operator = (const Tuple_3d& t);
+    bool operator == (const Tuple_3d& t) const;
+    bool operator != (const Tuple_3d& t) const;
+    void operator () (real x, real y, real z, real w);
+    real operator | (const Tuple_3d& t) const;
+    real operator [] (Coord c) const;
+    real& operator [] (Coord c);
+    Coord majorAxis (void) const;
+    Coord minorAxis (void) const;
+};
 
-//------------------------------------------------------------------------------
-//	classes
-//------------------------------------------------------------------------------
-class	tuple_3d																																	//	4 dimensional tuple_3d class
-{																																								//	begin tuple_3d class definition
-	private:																																			//	members internal to this class only
-	protected:																																		//	members internal to this class hierarchy
-				real	xyz[4];																														//	4 tuple_3d
-	public:																																				//	members available externally
-				tuple_3d (void) {}																											//	default constructor
-				tuple_3d (const tuple_3d& t);																						//	copy constructor
-				tuple_3d (real x, real y, real z, real w);															//	constructor from 4 values
-				void	operator = (const tuple_3d& t);																		//	assignment operator
-				bool	operator == (const tuple_3d& t) const;														//	equality operator
-				bool	operator != (const tuple_3d& t) const;														//	inequality operator
-				void	operator () (real x, real y, real z, real w);											//	function call operator
-				real	operator | (const tuple_3d& t) const;															//	inner product operator
-				real	operator [] (coord c) const;																			//	array reference operator
-				real	&operator [] (coord c);																						//	array reference operator
-				coord	MajorAxis (void) const;																						//	return the major axis of the tuple_3d
-				coord	MinorAxis (void) const;																						//	return the minor axis of the tuple_3d
-};																																							//	end tuple_3d class definition
+inline	real	Tuple_3d::operator [] (Coord c) const {
+    return xyz[c];
+}
 
-//------------------------------------------------------------------------------
-//	inlines
-//------------------------------------------------------------------------------
-inline	real	tuple_3d::operator [] (coord c) const															//	array reference operator
-{																																								//	begin
-	return xyz[c];																																//	return the appropriate coordinate of the tuple_3d
-}																																								//	end
+inline	real& Tuple_3d::operator [] (Coord c) {
+    return xyz[c];
+}
 
-//------------------------------------------------------------------------------
-inline	real	&tuple_3d::operator [] (coord c)																	//	array reference operator
-{																																								//	begin
-	return xyz[c];																																//	return the appropriate coordinate of the tuple_3d
-}																																								//	end
 
-//------------------------------------------------------------------------------
-
-#endif	//TUPLE
+#endif  //  _TUPLE_3D_

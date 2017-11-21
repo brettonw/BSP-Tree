@@ -1,47 +1,32 @@
-//------------------------------------------------------------------------------
-//	File:					ray.h
-//	Date:					9/22/94
-//	Author:				Bretton Wade
-//
-//	Description:	this file contains the class definition for a ray
-//
-//------------------------------------------------------------------------------
+#ifndef     _VECTOR_3D_
+#include    "vector_3d.h"
+#endif  //  _VECTOR_3D_
 
-#include "point_3d.h"
-#include "vector_3d.h"
+#ifndef     _POINT_3D_
+#include    "point_3d.h"
+#endif  //  _POINT_3D_
 
-#ifndef	RAY
-#define	RAY
+#ifndef	    _RAY_3D_
+#define     _RAY_3D_
 
-//------------------------------------------------------------------------------
-//	classes
-//------------------------------------------------------------------------------
-class	ray																																				//	ray class
-{																																								//	begin
-	private:																																			//	members internal to this class only
-	protected:																																		//	members internal to this class hierarchy
-				point_3d		origin;																											//	the originating point_3d of the ray
-				vector_3d	direction;																										//	the direction vector_3d of the ray
-	public:																																				//	members available externally
-				ray (const point_3d& origin, const vector_3d& direction);								//	constructor
-const 	point_3d 	&Origin (void) const;																					//	return a reference to the origin point_3d of the ray
-const 	vector_3d	&Direction (void) const;																			//	return a reference to the direction vector_3d of the ray
-				point_3d	IntersectionPoint (real distance) const;											//	compute the point_3d at which the intersection occurs
-};																																							//	end
+class Ray_3d {
+    protected:
+    Point_3d origin;
+    Vector_3d direction;
 
-//------------------------------------------------------------------------------
-//	inlines
-//------------------------------------------------------------------------------
-inline	const 	point_3d 	&ray::Origin (void) const															//	return a reference to the origin point_3d of the ray
-{																																								//	begin
-	return origin;																																//	return the origin
-}																																								//	end
+    public:
+    Ray_3d (const Point_3d& origin, const Vector_3d& direction);
+    const Point_3d& getOrigin (void) const;
+    const Vector_3d& getDirection (void) const;
+    Point_3d intersectionPoint (real distance) const;
+};
 
-inline	const 	vector_3d 	&ray::Direction (void) const												//	return a reference to the direction vector_3d of the ray
-{																																								//	begin
-	return direction;																															//	return the direction
-}																																								//	end
+inline	const Point_3d& Ray_3d::getOrigin (void) const {
+    return origin;
+}
 
-//------------------------------------------------------------------------------
+inline	const Vector_3d& Ray_3d::getDirection (void) const {
+    return direction;
+}
 
-#endif	//RAY
+#endif  //  _RAY_3D_

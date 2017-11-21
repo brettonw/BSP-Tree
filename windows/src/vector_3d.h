@@ -1,52 +1,35 @@
-//------------------------------------------------------------------------------
-//	File:					vector_3d.h
-//	Date:					8/26/94
-//	Author:				Bretton Wade
-//
-//	Description:	this file contains the class definition for a vector_3d
-//
-//------------------------------------------------------------------------------
+#ifndef	    _TUPLE_3D_
+#include    "tuple_3d.h"
+#endif  //  _TUPLE_3D_
 
-#include "tuple_3d.h"
+#ifndef     _VECTOR_3D_
+#define     _VECTOR_3D_
 
-#ifndef	VECTOR_3D
-#define	VECTOR_3D
+#ifndef     _POINT_3D_
+class Point_3d;
+#endif  //  _POINT_3D_
 
-//------------------------------------------------------------------------------
-//	classes
-//------------------------------------------------------------------------------
-#ifndef	POINT_3D
-class	point_3d;																																	//	forward declaration
-#endif
+class Vector_3d : public Tuple_3d {
+    public:
+    Vector_3d (void) {}
+    Vector_3d (real x, real y, real z, real w = R (0.0));
+    Vector_3d (const Vector_3d& v);
+    Vector_3d (const Point_3d& p);
+    Vector_3d (const Tuple_3d& t);
+    Vector_3d& operator = (const Vector_3d& v);
+    Vector_3d& operator = (const Tuple_3d& t);
+    void operator () (real x, real y, real z, real w = R (0.0));
+    Vector_3d operator * (real s) const;
+    Vector_3d operator / (real s) const;
+    Vector_3d operator ^ (const Vector_3d& v) const;
+    Vector_3d operator + (const Vector_3d& v) const;
+    Vector_3d& operator += (const Vector_3d& v);
+    Vector_3d operator - (const Vector_3d& v) const;
+    Vector_3d operator - (void) const;
+    real norm (void) const;
+    Vector_3d& normalize (void);
+};
 
-//------------------------------------------------------------------------------
-class	vector_3d : public tuple_3d																								//	4 dimensional vector_3d class
-{																																								//	begin vector_3d class definition
-	public:																																				//	public interface
-		vector_3d (void) {}																													//	default constructor
-		vector_3d (real x, real y, real z, real w = R(0.0));												//	constructor from 4 values
-		vector_3d (const vector_3d& v);																							//	copy constructor
-		vector_3d (const point_3d& p);																							//	constructor from a point_3d
-		vector_3d (const tuple_3d& t);																							//	constructor from a tuple_3d
-		vector_3d	&operator = (const vector_3d& v);																	//	assignment operator
-		vector_3d	&operator = (const tuple_3d& t);																	//	assignment operator
-		void			operator () (real x, real y, real z, real w = R(0.0));						//	function call operator
-		vector_3d operator * (real s) const;																				//	scalar multiplication
-		vector_3d operator / (real s) const;																				//	scalar division
-		vector_3d	operator ^ (const vector_3d& v) const;														//	cross product
-		vector_3d	operator + (const vector_3d& v) const;														//	addition operator
-		vector_3d	&operator += (const vector_3d& v);																//	self addition operator
-		vector_3d	operator - (const vector_3d& v) const;														//	subtraction operator
-		vector_3d	operator - (void) const;																					//	unary minus operator
-		real			Norm (void) const;																								//	compute the length of the vector_3d
-		vector_3d	&Normalize (void);																								//	reduce the vector_3d to length 1.0
-};																																							//	end vector_3d class definition
+extern	Vector_3d	ZERO_VECTOR;
 
-//------------------------------------------------------------------------------
-//	global variables
-//------------------------------------------------------------------------------
-extern	vector_3d	ZERO_VECTOR;																									//	a zero value vector_3d
-
-//------------------------------------------------------------------------------
-
-#endif	//VECTOR_3D
+#endif  //  _VECTOR_3D_

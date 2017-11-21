@@ -1,31 +1,28 @@
-//------------------------------------------------------------------------------
-//	File:					transform.h
-//	Date:					9/4/94
-//	Author:				Bretton Wade
-//
-//	Description:	this file contains methods for the transformations matrices
-//
-//------------------------------------------------------------------------------
+#ifndef     _VECTOR_3D_
+#include    "vector_3d.h"
+#endif  //  _VECTOR_3D_
 
-#include "vector_3d.h"
-#include "point_3d.h"
-#include "matrix_3d.h"
+#ifndef     _POINT_3D_
+#include    "point_3d.h"
+#endif  //  _POINT_3D_
 
-#ifndef	TRANSFORM
-#define	TRANSFORM
+#ifndef     _MATRIX_3D_
+#include    "matrix_3d.h"
+#endif  //  _MATRIX_3D_
 
-//------------------------------------------------------------------------------
-//	Functions
-//------------------------------------------------------------------------------
-matrix_3d	RotateX (real angle);																										//	build a transformation matrix_3d
-matrix_3d	RotateY (real angle);																										//	build a transformation matrix_3d
-matrix_3d	RotateZ (real angle);																										//	build a transformation matrix_3d
-matrix_3d	Translate (real x, real y, real z);																			//	build a transformation matrix_3d
-matrix_3d	Scale (real x, real y, real z);																					//	build a transformation matrix_3d
-matrix_3d	Perspective (real distance);																						//	build a transformation matrix_3d
-matrix_3d	VectorMatrix (tuple_3d& n);																							//	build a vector_3d rotation matrix_3d
-matrix_3d	ViewMatrix (const vector_3d& u, const vector_3d& v, const vector_3d& n, const point_3d& r);	//	build a viewing matrix_3d from a vector_3d set
+#ifndef     _TRANSFORM_3D_
+#define     _TRANSFORM_3D_
 
-//------------------------------------------------------------------------------
+class Transform_3d {
+    public:
+    static Matrix_3d rotateX (real angle);
+    static Matrix_3d rotateY (real angle);
+    static Matrix_3d rotateZ (real angle);
+    static Matrix_3d translate (real x, real y, real z);
+    static Matrix_3d scale (real x, real y, real z);
+    static Matrix_3d perspective (real distance);
+    static Matrix_3d vectorMatrix (Tuple_3d& n);
+    static Matrix_3d viewMatrix (const Vector_3d& u, const Vector_3d& v, const Vector_3d& n, const Point_3d& r);
+};
 
-#endif	//TRANSFORM
+#endif  //  _TRANSFORM_3D_

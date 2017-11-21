@@ -1,58 +1,43 @@
-//------------------------------------------------------------------------------
-//	File:					camera.h
-//	Date:					9/4/94
-//	Author:				Bretton Wade
-//
-//	Description:	this file contains the class definition for a camera
-//
-//------------------------------------------------------------------------------
+#ifndef     _POINT_3D_
+#include    "point_3d.h"
+#endif  //  _POINT_3D_
 
-#include "point_3d.h"
-#include "matrix_3d.h"
+#ifndef     _MATRIX_3D_
+#include    "matrix_3d.h"
+#endif  //  _MATRIX_3D_
 
-#ifndef	CAMERA
-#define	CAMERA
 
-//------------------------------------------------------------------------------
-//	classes
-//------------------------------------------------------------------------------
-class	camera																																		//	camera class
-{																																								//	begin camera class definition
-	private:																																			//	private interface
-	protected:																																		//	protected interface
-			point_3d	eye;																														//	eye location
-			matrix_3d	viewing, inverse;																								//	the viewing matrix_3d suite
-	public:																																				//	public interface
-			camera (const point_3d& eye, const point_3d& to, real fov);								//	default constructor
-			void			Look (const point_3d& eye, const point_3d& to, real fov);				//	set the camera location and viewing direction
-const matrix_3d	&Transform (void) const;																				//	return a reference to the transformation matrix_3d
-const matrix_3d	&Inverse (void) const;																					//	return a reference to the inverse transformation matrix_3d
-const	point_3d	&Eye (void) const;																							//	return a reference to the eye point_3d
-};																																							//	end camera class definition
+#ifndef     _CAMERA_3D_
+#define     _CAMERA_3D_
 
-//------------------------------------------------------------------------------
-//	inlines
-//------------------------------------------------------------------------------
-inline	const matrix_3d	&camera::Transform (void) const													//	return a reference to the transformation matrix_3d
-{																																								//	begin
-	return viewing;																																//	return the matrix_3d
-}																																								//	end
+class	Camera_3d {
+    protected:
+    Point_3d eye;
+    Matrix_3d viewing;
+    Matrix_3d inverse;
 
-inline	const matrix_3d	&camera::Inverse (void) const														//	return a reference to the inverse transformation matrix_3d
-{																																								//	begin
-	return inverse;																																//	return the matrix_3d
-}																																								//	end
+    public:
+    Camera_3d (const Point_3d& eye, const Point_3d& to, real fov);
+    void look (const Point_3d& eye, const Point_3d& to, real fov);
+    const Matrix_3d& getTransform (void) const;
+    const Matrix_3d& getInverse (void) const;
+    const Point_3d& getEye (void) const;
 
-inline	const point_3d	&camera::Eye (void) const																//	return a reference to the eye point_3d
-{																																								//	begin
-	return eye;																																		//	return the point_3d
-}																																								//	end
+    // compute the field of view (FOV) from a film size (mm - measured 
+    // diagonally) and lens focal length (mm)
+    static real	lensToFov (int focal_length = 50, real film_size = 43.26661531);
+};
 
-//------------------------------------------------------------------------------
-//	functions
-//------------------------------------------------------------------------------
-real	LensToFOV (int focal_length = 50, real film_size = 43.26661531);					//	compute the fov from a film size (measured diagonally) and lens focal length
+inline const Matrix_3d& Camera_3d::getTransform (void) const {
+    return viewing;
+}
 
-//------------------------------------------------------------------------------
+inline const Matrix_3d& Camera_3d::getInverse (void) const {
+    return inverse;
+}
 
-#endif	//CAMERA
+inline const Point_3d& Camera_3d::getEye (void) const {
+    return eye;
+}
+
+#endif  //  _CAMERA_3D_

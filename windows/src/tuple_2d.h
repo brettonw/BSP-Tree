@@ -15,15 +15,15 @@ class Tuple_2d {
     bool operator != (const Tuple_2d& t) const;
     void operator () (real x, real y);
     real operator | (const Tuple_2d& t) const;
-    real operator [] (coord c) const;
-    real& operator [] (coord c);
+    real operator [] (Coord c) const;
+    real& operator [] (Coord c);
 };
 
-inline real Tuple_2d::operator [] (coord c) const {
+inline real Tuple_2d::operator [] (Coord c) const {
     return xy[c];
 }
 
-inline real& Tuple_2d::operator [] (coord c) {
+inline real& Tuple_2d::operator [] (Coord c) {
     return xy[c];
 }
 

@@ -2,8 +2,9 @@
 #include	"polygon_3d.h"
 #endif  //  _POLYGON_
 
+#ifndef	    _BOUND_3D_
 #include	"bound_3d.h"
-
+#endif  //  _BOUND_3D_
 
 #ifndef     _PTR_TO_H_
 #include    "ptr_to.h"
@@ -17,7 +18,7 @@ MAKE_PTR_TO (PolygonList_3d);
 class	PolygonList_3d : public CountedObject {
     protected:
     std::vector<PtrToPolygon_3d> polygons;
-    bound_3d box;
+    Bound_3d box;
 
     public:
     PolygonList_3d (void);
@@ -28,10 +29,10 @@ class	PolygonList_3d : public CountedObject {
     PtrToPolygon_3d pop (void);
     bool empty (void) const;
     void draw (void) const;
-    const bound_3d& getBoundingBox (void) const;
+    const Bound_3d& getBoundingBox (void) const;
 };
 
-inline const bound_3d& PolygonList_3d::getBoundingBox (void) const {
+inline const Bound_3d& PolygonList_3d::getBoundingBox (void) const {
     return box;
 }
 

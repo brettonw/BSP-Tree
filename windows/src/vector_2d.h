@@ -1,26 +1,27 @@
-#include "tuple_2d.h"
+#ifndef	    _TUPLE_2D_
+#include    "tuple_2d.h"
+#endif  //  _TUPLE_2D_
 
-#ifndef	VECTOR_2D
-#define	VECTOR_2D
+#ifndef	    _VECTOR_2D_
+#define     _VECTOR_2D_
 
-#ifndef	POINT_2D
-class	point_2d;
-#endif
+#ifndef     _POINT_2D_
+class Point_2d;
+#endif	//  _POINT_2D_
 
 class	Vector_2d : public Tuple_2d {
-    protected:
     public:
     Vector_2d (void) {}
     Vector_2d (real x, real y);
     Vector_2d (const Vector_2d& v);
-    Vector_2d (const point_2d& p);
+    Vector_2d (const Point_2d& p);
     Vector_2d& operator = (const Vector_2d& v);
     Vector_2d operator * (real s) const;
     Vector_2d operator / (real s) const;
     Vector_2d operator + (const Vector_2d& v) const;
     Vector_2d operator - (const Vector_2d& v) const;
-    real Norm (void) const;
-    Vector_2d& Normalize (void);
+    real norm (void) const;
+    Vector_2d& normalize (void);
 };
 
-#endif
+#endif  //  _VECTOR_2D_

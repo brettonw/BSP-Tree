@@ -1,12 +1,12 @@
 #include "precompile.h"
-#include "bspnode_3d.h"
+#include "bsp_tree_node_3d.h"
 
-void BspTree::insert (PtrToPolygonList_3d& list, hclass keep, hclass cur) {
+void BspTree_3d::insert (PtrToPolygonList_3d& list, hclass keep, hclass cur) {
     if (list->empty ()) return;
     if (ptrTo) {
         ptrTo->insert (list, keep);
     } else if ((cur == keep) or (keep == HC_SPANNING)) {
-        setPtr (new BspNode (list->pop ()));
+        setPtr (new BspTreeNode_3d (list->pop ()));
         // add ref
 
         if (!list->empty ()) {
@@ -15,7 +15,7 @@ void BspTree::insert (PtrToPolygonList_3d& list, hclass keep, hclass cur) {
     }
 }
 
-void BspTree::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, hclass keep, hclass cur) {
+void BspTree_3d::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, hclass keep, hclass cur) {
     if (ptrTo) {
         ptrTo->push (poly, result, keep);
     } else if (cur == keep) {
@@ -23,7 +23,7 @@ void BspTree::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, hc
     }
 }
 
-void BspTree::push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, hclass keep, hclass cur) {
+void BspTree_3d::push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, hclass keep, hclass cur) {
     if (list->empty ()) return;
     if (ptrTo) {
         ptrTo->push (list, result, keep);
@@ -32,19 +32,19 @@ void BspTree::push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, hcla
     }
 }
 
-void BspTree::reduce (void) {
+void BspTree_3d::reduce (void) {
     if (ptrTo) {
         ptrTo->reduce ();
     }
 }
 
-void BspTree::draw (const point_3d& eye) const {
+void BspTree_3d::draw (const Point_3d& eye) const {
     if (ptrTo) {
         ptrTo->draw (eye);
     }
 }
 
-bool BspTree::rayIntersection (const ray & r, PtrToPolygon_3d& poly_hit, point_3d& ipt) const {
+bool BspTree_3d::rayIntersection (const Ray_3d & r, PtrToPolygon_3d& poly_hit, Point_3d& ipt) const {
     if (ptrTo) {
         return ptrTo->rayIntersection (r, poly_hit, ipt);
     }

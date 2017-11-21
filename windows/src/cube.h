@@ -19,7 +19,7 @@
 //------------------------------------------------------------------------------
 //	functions
 //------------------------------------------------------------------------------
-PtrToPolygonList_3d	Cube (matrix_3d transformation);																						//	compute a cube given a transformation
+PtrToPolygonList_3d	Cube (Matrix_3d transformation);																						//	compute a cube given a transformation
 
 //------------------------------------------------------------------------------
 

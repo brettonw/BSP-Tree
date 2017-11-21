@@ -1,38 +1,25 @@
-//------------------------------------------------------------------------------
-//	File:					plane_3d.h
-//	Date:					04/06/97
-//	Author:				Bretton Wade
-//
-//	Description:	this file contains the class definition for a plane_3d
-//
-//------------------------------------------------------------------------------
+#ifndef     _OBJECT_3D_
+#include    "object_3d.h"
+#endif  //  _OBJECT_3D_
 
-#include "object_3d.h"
+#ifndef     _PLANE_3D_
+#define     _PLANE_3D_
 
-#ifndef	PLANE_3D
-#define	PLANE_3D
+class	Plane_3d : public Tuple_3d, public Object_3d {
+    public:
+    Plane_3d (void) {}
+    Plane_3d (const Vector_3d& v, const Point_3d& p);
+    Plane_3d (const Point_3d& a, const Point_3d& b, const Point_3d& c);
+    Plane_3d (real a, real b, real c, real d);
+    Plane_3d (const Plane_3d& p);
+    Plane_3d (const Tuple_3d& t);
+    virtual	~Plane_3d (void);
+    Plane_3d& operator = (const Plane_3d& p);
+    Plane_3d& operator = (const Tuple_3d& t);
+    void define (const Vector_3d& v, const Point_3d& p);
+    void define (const Point_3d& a, const Point_3d& b, const Point_3d& c);
+    void invert (void);
+    virtual	real rayIntersection (const Ray_3d& r) const;
+};
 
-//------------------------------------------------------------------------------
-//	classes
-//------------------------------------------------------------------------------
-class	plane_3d : public tuple_3d, public Object_3d 															//	3 dimensional plane_3d class
-{																																								//	begin plane_3d class definition
-	public:																																				//	public interface
-				plane_3d (void) {}																											//	default constructor
-				plane_3d (const vector_3d& v, const point_3d& p);												//	normal constructor
-				plane_3d (const point_3d& a, const point_3d& b, const point_3d& c);			//	normal constructor
-				plane_3d (real a, real b, real c, real d);															//	component constructor
-				plane_3d (const plane_3d& p);																						//	copy constructor
-				plane_3d (const tuple_3d& t);																						//	constructor from a tuple_3d
-virtual	~plane_3d	(void);																												//	destructor
-				plane_3d	&operator = (const plane_3d& p);															//	assignment operator
-				plane_3d	&operator = (const tuple_3d& t);															//	assignment operator
-				void			Define (const vector_3d& v, const point_3d& p);								//	compute the plane_3d equation
-				void			Define (const point_3d& a, const point_3d& b, const point_3d& c);//	compute the plane_3d equation
-				void			Invert (void);																								//	invert the values of the plane_3d equation
-virtual	real			rayIntersection (const ray& r) const;													//	return the distance along the ray at which the intersection occurs
-};																																							//	end plane_3d class definition
-
-//------------------------------------------------------------------------------
-
-#endif	//PLANE_3D
+#endif  //  _PLANE_3D_

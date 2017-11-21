@@ -1,23 +1,19 @@
-#ifndef     _COUNTED_OBJECT_H_
-#include "counted_object.h"
-#endif  //  _COUNTED_OBJECT_H_
+#ifndef     _COUNTED_OBJECT_
+#include    "counted_object.h"
+#endif  //  _COUNTED_OBJECT_
 
-#include "ray_3d.h"
+#ifndef	    _RAY_3D_
+#include    "ray_3d.h"
+#endif  //  _RAY_3D_
 
 #ifndef     _OBJECT_3D_
 #define     _OBJECT_3D_
 
-//------------------------------------------------------------------------------
-//	classes
-//------------------------------------------------------------------------------
-class	Object_3d : public CountedObject
-{
-	public:
+class	Object_3d : public CountedObject {
+    public:
     Object_3d (void) {}
-virtual	~Object_3d (void);
-virtual	real		rayIntersection (const ray& r) const = 0;
+    virtual	~Object_3d (void);
+    virtual	real rayIntersection (const Ray_3d& r) const = 0;
 };
-
-//------------------------------------------------------------------------------
 
 #endif  //  _OBJECT_3D_

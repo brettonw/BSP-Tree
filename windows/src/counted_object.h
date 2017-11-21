@@ -3,8 +3,8 @@
 // All rights reserved.
 //-----------------------------------------------------------------------------
 
-#ifndef     _COUNTED_OBJECT_H_
-#define     _COUNTED_OBJECT_H_
+#ifndef     _COUNTED_OBJECT_
+#define     _COUNTED_OBJECT_
 
 class    CountedObject {
     public:
@@ -21,7 +21,7 @@ class    CountedObject {
 
 #ifndef NDEBUG
     uint id;
-    static  uint s_id;
+    static uint s_id;
 #endif
 };
 
@@ -29,4 +29,4 @@ class    CountedObject {
 #include    "counted_object.inl"
 #endif  //  _COUNTED_OBJECT_INL_
 
-#endif  //  _COUNTED_OBJECT_H_
+#endif  //  _COUNTED_OBJECT_
