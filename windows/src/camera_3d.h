@@ -6,7 +6,6 @@
 #include    "matrix_3d.h"
 #endif  //  _MATRIX_3D_
 
-
 #ifndef     _CAMERA_3D_
 #define     _CAMERA_3D_
 

@@ -80,7 +80,7 @@ real Polygon_3d::rayIntersection (const Ray_3d& r) const {
     return	plane.rayIntersection (r);
 }
 
-hclass Polygon_3d::Split (const PtrToPolygon_3d& poly, const Plane_3d& plane, PtrToPolygon_3d& in, PtrToPolygon_3d& out) {
+HClass Polygon_3d::Split (const PtrToPolygon_3d& poly, const Plane_3d& plane, PtrToPolygon_3d& in, PtrToPolygon_3d& out) {
     static Point_3d outpts[64];
     static Point_3d inpts[64];
     int out_c = 0;
@@ -88,7 +88,7 @@ hclass Polygon_3d::Split (const PtrToPolygon_3d& poly, const Plane_3d& plane, Pt
     Point_3d ptA;
     Point_3d ptB;
     real sideA, sideB;
-    hclass poly_class = HC_ON;
+    HClass poly_class = HC_ON;
     ptA = poly->getVertex (poly->getCount () - 1);
     sideA = ptA | plane;
     for (uint i = 0 - 1; ++i < poly->getCount ();) {

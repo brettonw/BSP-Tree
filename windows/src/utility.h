@@ -1,5 +1,5 @@
-#ifndef UTILITY
-#define UTILITY
+#ifndef     _UTILITY_H_
+#define     _UTILITY_H_
 
 inline real degreesToRadians (real angle) {
     return angle * (PI / R (180.0));
@@ -27,4 +27,4 @@ inline real unitRandom (void) {
     return rand () / real (RAND_MAX);
 }
 
-#endif //UTILITY
+#endif  //  _UTILITY_H_

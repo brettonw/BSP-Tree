@@ -3,12 +3,12 @@
 // All rights reserved.
 //-----------------------------------------------------------------------------
 
-#ifndef     _PTR_TO_H_
-#define     _PTR_TO_H_
-
 #ifndef     _COUNTED_OBJECT_H_
 #include    "counted_object.h"
 #endif  //  _COUNTED_OBJECT_H_
+
+#ifndef     _PTR_TO_H_
+#define     _PTR_TO_H_
 
 template <class aType>
 class   PtrTo {

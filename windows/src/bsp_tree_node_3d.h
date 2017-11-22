@@ -18,9 +18,9 @@ class	BspTreeNode_3d : public CountedObject {
     ~BspTreeNode_3d (void);
 
     public:
-    void		insert (PtrToPolygonList_3d& list, hclass keep);
-    void		push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, hclass keep);
-    void		push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, hclass keep);
+    void		insert (PtrToPolygonList_3d& list, HClass keep);
+    void		push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, HClass keep);
+    void		push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, HClass keep);
     void		reduce (void);
     void		draw (const Point_3d	&eye) const;
     bool		rayIntersection (const Ray_3d& r, PtrToPolygon_3d& poly_hit, Point_3d& ipt) const;

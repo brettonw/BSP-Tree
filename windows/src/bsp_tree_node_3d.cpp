@@ -10,12 +10,12 @@ BspTreeNode_3d::BspTreeNode_3d (const PtrToPolygon_3d& poly) {
 
 BspTreeNode_3d::~BspTreeNode_3d (void) {}
 
-void BspTreeNode_3d::insert (PtrToPolygonList_3d& list, hclass keep) {
+void BspTreeNode_3d::insert (PtrToPolygonList_3d& list, HClass keep) {
     PtrToPolygonList_3d	inside (new PolygonList_3d ());
     PtrToPolygonList_3d outside (new PolygonList_3d ());
     PtrToPolygon_3d		poly, inp, outp;
     for (poly = list->pop (); poly.getPtr (); poly = list->pop ()) {
-        hclass	sgn = Polygon_3d::Split (poly, plane, inp, outp);
+        HClass	sgn = Polygon_3d::Split (poly, plane, inp, outp);
         if (sgn == HC_ON)
             on->addToList (poly);
         else {
@@ -31,11 +31,11 @@ void BspTreeNode_3d::insert (PtrToPolygonList_3d& list, hclass keep) {
         out.insert (outside, keep, HC_OUT);
 }
 
-void BspTreeNode_3d::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, hclass keep) {
+void BspTreeNode_3d::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, HClass keep) {
     PtrToPolygonList_3d	inside (new PolygonList_3d ());
     PtrToPolygonList_3d outside (new PolygonList_3d ());
     PtrToPolygon_3d	inp, outp;
-    hclass	sgn = Polygon_3d::Split (poly, plane, inp, outp);
+    HClass	sgn = Polygon_3d::Split (poly, plane, inp, outp);
     if (sgn == HC_ON)
         result->addToList (poly);
     else {
@@ -46,12 +46,12 @@ void BspTreeNode_3d::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& res
     }
 }
 
-void BspTreeNode_3d::push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, hclass keep) {
+void BspTreeNode_3d::push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, HClass keep) {
     PtrToPolygonList_3d	inside (new PolygonList_3d ());
     PtrToPolygonList_3d outside (new PolygonList_3d ());
     PtrToPolygon_3d		poly, inp, outp;
     for (poly = list->pop (); poly.getPtr (); poly = list->pop ()) {
-        hclass	sgn = Polygon_3d::Split (poly, plane, inp, outp);
+        HClass	sgn = Polygon_3d::Split (poly, plane, inp, outp);
         if (sgn == HC_ON)
             result->addToList (poly);
         else {

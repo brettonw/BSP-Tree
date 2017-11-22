@@ -1,7 +1,9 @@
-#include "coord.h"
+#ifndef     _COORD_
+#include    "coord.h"
+#endif  //  _COORD_
 
-#ifndef TUPLE_2D
-#define TUPLE_2D
+#ifndef     _TUPLE_2D_
+#define     _TUPLE_2D_
 
 class Tuple_2d {
     protected:
@@ -27,4 +29,4 @@ inline real& Tuple_2d::operator [] (Coord c) {
     return xy[c];
 }
 
-#endif
+#endif  //  _TUPLE_2D_

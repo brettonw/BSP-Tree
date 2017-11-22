@@ -11,9 +11,9 @@
 
 MAKE_PTR_TO (Polygon_3d);
 
-enum	HClass { HC_IN = -1, HC_ON = 0, HC_OUT = 1, HC_SPANNING = 2 };							//	classification type for plane_3d comparisons
+enum HClass { HC_IN = -1, HC_ON = 0, HC_OUT = 1, HC_SPANNING = 2 };
 
-class	Polygon_3d : public Object_3d {
+class Polygon_3d : public Object_3d {
     protected:
     Plane_3d plane;
     uint count;

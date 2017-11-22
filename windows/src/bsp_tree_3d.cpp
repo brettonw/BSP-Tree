@@ -1,7 +1,7 @@
 #include "precompile.h"
 #include "bsp_tree_node_3d.h"
 
-void BspTree_3d::insert (PtrToPolygonList_3d& list, hclass keep, hclass cur) {
+void BspTree_3d::insert (PtrToPolygonList_3d& list, HClass keep, HClass cur) {
     if (list->empty ()) return;
     if (ptrTo) {
         ptrTo->insert (list, keep);
@@ -15,7 +15,7 @@ void BspTree_3d::insert (PtrToPolygonList_3d& list, hclass keep, hclass cur) {
     }
 }
 
-void BspTree_3d::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, hclass keep, hclass cur) {
+void BspTree_3d::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result, HClass keep, HClass cur) {
     if (ptrTo) {
         ptrTo->push (poly, result, keep);
     } else if (cur == keep) {
@@ -23,7 +23,7 @@ void BspTree_3d::push (const PtrToPolygon_3d& poly, PtrToPolygonList_3d& result,
     }
 }
 
-void BspTree_3d::push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, hclass keep, hclass cur) {
+void BspTree_3d::push (PtrToPolygonList_3d& list, PtrToPolygonList_3d& result, HClass keep, HClass cur) {
     if (list->empty ()) return;
     if (ptrTo) {
         ptrTo->push (list, result, keep);
