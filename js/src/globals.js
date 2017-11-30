@@ -1,4 +1,3 @@
-Math.EPSILON = 1.0e-6;
-Math.INFINITY = 1.0e6;
-Math.TWO_PI = 2.0 * Math.PI;
-
+﻿// create a namespace we will use for everything we do
+var αω = {};
+var ΑΩ = αω;

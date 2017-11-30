@@ -1,7 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo", "Demo.vcxproj", "{EC10EAB1-9841-40E9-A717-82751B7888E2}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "windows", "Demo.vcxproj", "{EC10EAB1-9841-40E9-A717-82751B7888E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{68B6446E-41AD-443E-BD2B-8B8D7C53CEEF}"
+	ProjectSection(SolutionItems) = preProject
+		..\js\index.html = ..\js\index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0AE5A035-90B9-4DB7-8784-633052E111FA}"
+	ProjectSection(SolutionItems) = preProject
+		..\js\src\globals.js = ..\js\src\globals.js
+		..\js\src\htuple.js = ..\js\src\htuple.js
+		..\js\src\htuple3d.js = ..\js\src\htuple3d.js
+		..\js\src\hyperplane.js = ..\js\src\hyperplane.js
+		..\js\src\math.js = ..\js\src\math.js
+		..\js\src\matrix.js = ..\js\src\matrix.js
+		..\js\src\polygon.js = ..\js\src\polygon.js
+		..\js\src\program.js = ..\js\src\program.js
+		..\js\src\registry.js = ..\js\src\registry.js
+		..\js\src\test.js = ..\js\src\test.js
+		..\js\src\tuple.js = ..\js\src\tuple.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,5 +38,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0AE5A035-90B9-4DB7-8784-633052E111FA} = {68B6446E-41AD-443E-BD2B-8B8D7C53CEEF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {69CBCE7B-BA69-4C53-A901-CC054D310B33}
 	EndGlobalSection
 EndGlobal
