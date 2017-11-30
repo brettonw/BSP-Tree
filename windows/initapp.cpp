@@ -4,7 +4,7 @@
 #include	"bsp_tree_3d.h"
 #include	"transform_3d.h"
 
-#define	CLASS_NAME "BSP Tree Demo"
+#define	CLASS_NAME L"BSP Tree Demo"
 
 static	MSG			gMessage;
 static	HWND		gWindow;
@@ -15,20 +15,16 @@ static  BspTree_3d  gWorld;
 PtrToPolygonList_3d	Extrude (const Point_3d* pts, int size, const Vector_3d& extrude) {
     Point_3d*   all_pts = new Point_3d[size * 2];
 
-
     for (int i = 0; i < size; ++i) {
         all_pts[i] = pts[i];
         all_pts[size + ((size - 1) - i)] = pts[i] + extrude;
     }
 
-
     int         num_faces = size + 2;
     PtrToPolygonList_3d extruded_polys;
 
-
     extruded_polys->addToList (new Polygon_3d (all_pts, (uint) size, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
     extruded_polys->addToList (new Polygon_3d (all_pts, (uint) size, size, size + 1, size + 2, size + 3, size + 4, size + 5, size + 6, size + 7, size + 8, size + 9, size + 10, size + 11, size + 12));
-
 
     for (int i = 0; i < size; ++i) {
         int h = (i + 1) % size;
@@ -37,9 +33,7 @@ PtrToPolygonList_3d	Extrude (const Point_3d* pts, int size, const Vector_3d& ext
         extruded_polys->addToList (new Polygon_3d (all_pts, 4, h, i, j, k));
     }
 
-
     delete[] all_pts;
-
 
     return extruded_polys;
 }
@@ -158,7 +152,7 @@ static	void	Open (HINSTANCE instance, int show) {
 
 static	void	Loop (void) {
     bool	done = FALSE;
-    while (!done)
+    while (!done) {
         if (PeekMessage (&gMessage, 0, 0, 0, PM_NOREMOVE)) {
             if (GetMessage (&gMessage, gWindow, 0, 0) == TRUE)
                 DispatchMessage (&gMessage);
@@ -172,11 +166,12 @@ static	void	Loop (void) {
             } else
                 WaitMessage ();
         }
+    }
 }
 
-static	void	Close (void) {}
+static void	Close (void) {}
 
-int PASCAL	WinMain (HINSTANCE inst, HINSTANCE prev, LPSTR cmdLine, int show) {
+int PASCAL WinMain (HINSTANCE inst, HINSTANCE prev, LPSTR cmdLine, int show) {
     Open (inst, show);
     Loop ();
     Close ();

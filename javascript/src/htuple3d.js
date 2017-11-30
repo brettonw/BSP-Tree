@@ -1,5 +1,5 @@
-var HTuple3d = function () {
-    var tuple = registry.fetch("HTuple3");
+let HTuple3d = function () {
+    let tuple = registry.fetch("HTuple3");
     tuple.cross = function (left, right) {
         return [
             (left[1] * right[2]) - (left[2] * right[1]),
@@ -7,6 +7,6 @@ var HTuple3d = function () {
             (left[0] * right[1]) - (left[1] * right[0]),
             0
         ];
-    }
+    };
     return tuple;
 }();

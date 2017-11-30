@@ -1,5 +1,5 @@
-var registry = function () {
-    var registry = Object.create (null);
+let registry = function () {
+    let registry = Object.create (null);
 
     registry.contents = {};
 
@@ -10,20 +10,20 @@ var registry = function () {
             this.contents[typeName] = create();
         }
         return this.contents[typeName];
-    }
+    };
 
     registry.fetch = function (typeName) {
         return this.contents[typeName];
-    }
+    };
 
     return registry;
 }();
 
-var DEF = function (typename, create) {
+let DEF = function (typename, create) {
     registry.define(typename, create);
-}
+};
 
-var NEW = function (typeName) {
-    var prototype = registry.fetch(typeName);
-    return (prototype != null) ? Object.create(prototype) : null;
-}
+let NEW = function (typeName) {
+    let prototype = registry.fetch(typeName);
+    return (prototype !== null) ? Object.create(prototype) : null;
+};

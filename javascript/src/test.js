@@ -1,3 +1,5 @@
+
+
 function test() {
     var points = [
         NEW("HTuple-3").point([0, 0, 1]),
