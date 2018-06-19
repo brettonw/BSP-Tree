@@ -80,7 +80,7 @@ void	InitializeModel (void) {
 #endif
 }
 
-long FAR PASCAL	WinProc (HWND window, UINT message, WPARAM wpar, LPARAM lpar) {
+LRESULT	WinProc (HWND window, UINT message, WPARAM wpar, LPARAM lpar) {
     switch (message) {
         case WM_CREATE:
             break;

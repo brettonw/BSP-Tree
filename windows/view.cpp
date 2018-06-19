@@ -5,7 +5,8 @@
 #define moveTo(x, y) MoveToEx (offscreenDC, x, y, 0)
 #define lineTo(x, y) LineTo (offscreenDC, x, y)
 
-View* gView;																													//	the world viewer
+View* gView;
+real aaFactor = 3.0;
 
 View::View (HWND wind) :
     transformation (Matrix_3d::identity),
@@ -15,11 +16,11 @@ View::View (HWND wind) :
     eye = cam.getEye ();
     window = wind;
 
-    GetClientRect (window,& clientRect);
+    GetClientRect (window, &clientRect);
     createOffscreen ();
 
-    ysize = (clientRect.bottom - clientRect.top) * R (0.5);
-    xsize = (clientRect.right - clientRect.left) * R (0.5);
+    ysize = (clientRect.bottom - clientRect.top) * R(0.5) * aaFactor;
+    xsize = (clientRect.right - clientRect.left) * R(0.5) * aaFactor;
     aspect = ysize;
 }
 
@@ -35,8 +36,8 @@ void View::createOffscreen () {
     offscreenDC = CreateCompatibleDC (screenDC);
 
     bitMapInfo.bmiHeader.biSize = sizeof (BITMAPINFOHEADER);
-    bitMapInfo.bmiHeader.biWidth = clientRect.right;
-    bitMapInfo.bmiHeader.biHeight = clientRect.bottom;
+    bitMapInfo.bmiHeader.biWidth = clientRect.right * aaFactor;
+    bitMapInfo.bmiHeader.biHeight = clientRect.bottom * aaFactor;
     bitMapInfo.bmiHeader.biPlanes = 1;
     bitMapInfo.bmiHeader.biBitCount = 32;
     bitMapInfo.bmiHeader.biCompression = BI_RGB;
@@ -55,18 +56,20 @@ void View::eraseOffscreen () {
     COLORREF color = RGB (255, 255, 255);
     HBRUSH brush = CreateSolidBrush (color);
     RECT rt;
-    GetClientRect (window,& rt);
-    FillRect (offscreenDC,& rt, brush);
+	GetClientRect (window, &rt);
+	rt.right = rt.left + ((rt.right - rt.left) * aaFactor);
+	rt.bottom = rt.top + ((rt.bottom - rt.top) * aaFactor);
+	FillRect (offscreenDC, &rt, brush);
     DeleteObject (brush);
 }
 
 void View::swapOffscreen () {
     PAINTSTRUCT ps;
-    HDC hdc = BeginPaint (window,& ps);
-    BitBlt (hdc, 0, 0, clientRect.right, clientRect.bottom, offscreenDC, 0, 0, SRCCOPY);
-    //SetStretchBltMode (hdc, HALFTONE);
-    //StretchBlt (hdc, 0, 0, clientRect.right, clientRect.bottom, offscreenDC, 0, 0, clientRect.right * 2, clientRect.bottom * 2, SRCCOPY);
-    EndPaint (window,& ps);
+    HDC hdc = BeginPaint (window, &ps);
+    //BitBlt (hdc, 0, 0, clientRect.right, clientRect.bottom, offscreenDC, 0, 0, SRCCOPY);
+    SetStretchBltMode (hdc, HALFTONE);
+    StretchBlt (hdc, 0, 0, clientRect.right, clientRect.bottom, offscreenDC, 0, 0, clientRect.right * aaFactor, clientRect.bottom * aaFactor, SRCCOPY);
+    EndPaint (window, &ps);
 }
 
 void View::moveToPt (const Point_2d& vp) const {
@@ -173,7 +176,7 @@ void View::handleDrag (POINT where, BspTree_3d tree) {
 }
 
 Point_2d View::dcToVdc (const POINT& p) const {
-    return Point_2d ((p.x - xsize) / aspect, (p.y - ysize) / -aspect);
+    return Point_2d (((p.x * aaFactor) - xsize) / aspect, ((p.y * aaFactor) - ysize) / -aspect);
 }
 
 POINT View::vdcToDc (const Point_2d& p) const {
