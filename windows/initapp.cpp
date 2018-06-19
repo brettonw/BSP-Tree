@@ -21,7 +21,7 @@ PtrToPolygonList_3d	Extrude (const Point_3d* pts, int size, const Vector_3d& ext
     }
 
     int         num_faces = size + 2;
-    PtrToPolygonList_3d extruded_polys;
+    PtrToPolygonList_3d extruded_polys = new PolygonList_3d;
 
     extruded_polys->addToList (new Polygon_3d (all_pts, (uint) size, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
     extruded_polys->addToList (new Polygon_3d (all_pts, (uint) size, size, size + 1, size + 2, size + 3, size + 4, size + 5, size + 6, size + 7, size + 8, size + 9, size + 10, size + 11, size + 12));
@@ -42,26 +42,36 @@ PtrToPolygonList_3d	Extrude (const Point_3d* pts, int size, const Vector_3d& ext
 void	InitializeModel (void) {
     //gWorld = BspTree;
 
+#if 1
+    Point_3d		house_pts[5];
+    house_pts[0] = Point_3d(R (-1.0), R (-1.0), R (-1.0));
+    house_pts[1] = Point_3d(R (-1.0), R (0.5), R (-1.0));
+    house_pts[2] = Point_3d(R (0.0), R (1.5), R (-1.0));
+    house_pts[3] = Point_3d(R (1.0), R (0.5), R (-1.0));
+    house_pts[4] = Point_3d(R (1.0), R (-1.0), R (-1.0));
+    PtrToPolygonList_3d house = Extrude(house_pts, 5, Vector_3d(R(0.0), R(0.0), R(2.0)));
+    gWorld.insert (house, HC_OUT, HC_OUT);
+
+
+    Point_3d		chimney_pts[5];
+    chimney_pts[0] = Point_3d(R (-1.0), R (-1.0), R (-1.0));
+    chimney_pts[1] = Point_3d(R (-1.0), R (0.5), R (-1.0));
+    chimney_pts[2] = Point_3d(R (0.0), R (1.5), R (-1.0));
+    chimney_pts[3] = Point_3d(R (1.0), R (0.5), R (-1.0));
+    chimney_pts[4] = Point_3d(R (1.0), R (-1.0), R (-1.0));
+    PtrToPolygonList_3d chimney = Extrude(chimney_pts, 5, Vector_3d(R(0.0), R(0.0), R(1.0)));
+    gWorld.insert(
+        Cube(
+            Transform_3d::scale(R(-1.5), R(-0.55), R(-1.5)) *
+            Transform_3d::translate(R(0.75), R(0.0), R(0.0))
+        ),
+        HC_IN, HC_SPANNING);
+
+    gWorld.reduce();
+#endif
+
+
 #if 0
-
-    point_3d		house_pts[5];
-    house_pts[0] = point_3d (R (-1.0), R (-1.0), R (-1.0));
-    house_pts[1] = point_3d (R (-1.0), R (0.5), R (-1.0));
-    house_pts[2] = point_3d (R (0.0), R (1.5), R (-1.0));
-    house_pts[3] = point_3d (R (1.0), R (0.5), R (-1.0));
-    house_pts[4] = point_3d (R (1.0), R (-1.0), R (-1.0));
-    world->Insert (Extrude (house_pts, 5, vector_3d (R (0.0), R (0.0), R (2.0))), HC_OUT, HC_OUT);
-
-
-    point_3d		chimney_pts[5];
-    chimney_pts[0] = point_3d (R (-1.0), R (-1.0), R (-1.0));
-    chimney_pts[1] = point_3d (R (-1.0), R (0.5), R (-1.0));
-    chimney_pts[2] = point_3d (R (0.0), R (1.5), R (-1.0));
-    chimney_pts[3] = point_3d (R (1.0), R (0.5), R (-1.0));
-    chimney_pts[4] = point_3d (R (1.0), R (-1.0), R (-1.0));
-
-
-#else
     gWorld.insert (Cube (IDENTITY_MATRIX), HC_OUT, HC_OUT);
     gWorld.insert (
         Cube (
@@ -77,6 +87,10 @@ void	InitializeModel (void) {
             Transform_3d::translate (R (0.5), R (0.0), R (0.0))
         ),
         HC_OUT, HC_SPANNING);
+#endif
+
+#if 0
+    Point_3d		g_points[4];																										//	eight vertices    g_points[0] = Point_3d(R(1.25), R(-0.5), R(1.25));    g_points[1] = Point_3d(R(1.25), R(-0.5), R(-1.25));    g_points[2] = Point_3d(R(-1.25), R(-0.5), R(-1.25));    g_points[3] = Point_3d(R(-1.25), R(-0.5), R(1.25));    PtrToPolygonList_3d	ground = new PolygonList_3d;    ground->addToList(new Polygon_3d(g_points, 4, 0, 1, 2, 3));    gWorld.insert(ground, HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(1.0), R(1.0)) * Transform_3d::rotateZ(R(-10.0)) * Transform_3d::translate(R(0.5), R(0.0), R(0.0))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(1.0), R(1.0)) * Transform_3d::rotateZ(R(10.0)) * Transform_3d::translate(R(-0.5), R(0.0), R(0.0))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(-1.0), R(-0.5), R(-0.5))), HC_IN, HC_OUT);    gWorld.reduce();    //gWorld.insert(Triangle(Transform_3d::scale(R(0.5), R(0.5), R(1.0)) * Transform_3d::rotateY(R(90.0)) * Transform_3d::translate(R(0.0), R(0.75), R(-0.75))), HC_OUT, HC_OUT);    //gWorld.insert(Triangle(Transform_3d::scale(R(0.5), R(0.5), R(1.0)) * Transform_3d::rotateY(R(-90.0)) * Transform_3d::translate(R(0.0), R(0.75), R(0.75))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.75), R(0.025), R(0.9)) * Transform_3d::rotateY(R(90.0)) * Transform_3d::translate(R(0.0), R(-0.225), R(0.0))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(-0.4), R(-0.25), R(-0.4)) * Transform_3d::translate(R(0.0), R(0.5), R(0.0))), HC_IN, HC_OUT);    gWorld.reduce();    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(-10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(-0.2))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(-0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(-0.2))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(-10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(-0.1))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(-0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(-0.1))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(-10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(0.0))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(-0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(0.0))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(-10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(0.1))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(-0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(0.1))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(-10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(0.2))), HC_OUT, HC_OUT);    gWorld.insert(Cube(Transform_3d::scale(R(0.25), R(0.025), R(0.0125)) * Transform_3d::translate(R(-0.25), R(-0.0125), R(0.0)) * Transform_3d::rotateZ(R(10.0)) * Transform_3d::translate(R(0.0), R(1.125), R(0.2))), HC_OUT, HC_OUT);
 #endif
 }
 
